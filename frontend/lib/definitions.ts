@@ -1,13 +1,24 @@
+export type User = {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+};
+
 export type Income = {
-  id: number;
+  id: string;
+  user_id: string;
   description: string;
   amount: number;
   date: string;
 };
 
 export type Expense = {
-  id: number;
+  id: string;
+  user_id: string;
   description: string;
   amount: number;
   date: string;
 };
+
+
