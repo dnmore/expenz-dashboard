@@ -65,7 +65,7 @@ async function listExpenseForUser(userId: string) {
 
 export async function GET() {
   try {
-    const userId = '62b4037c-98ae-4dce-8380-06bcf212b1ba';
+    const userId = 'REPLACE_WITH_USER_ID';
     return Response.json(await listExpenseForUser(userId));
   } catch (error) {
     return Response.json({ error }, { status: 500 });
