@@ -5,7 +5,7 @@ export type User = {
   password: string;
 };
 
-export type Income = {
+export type Transaction = {
   id: string;
   user_id: string;
   description: string;
@@ -13,12 +13,13 @@ export type Income = {
   date: string;
 };
 
-export type Expense = {
+export type LatestTransaction = {
   id: string;
-  user_id: string;
   description: string;
-  amount: number;
-  date: string;
+  amount: string;
 };
 
 
+export type LatestTransactionRaw = Omit<LatestTransaction, 'amount'> & {
+  amount: number;
+};

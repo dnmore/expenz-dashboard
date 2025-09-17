@@ -47,7 +47,7 @@ async function seedIncome() {
     income.map(
       (entry) => sql`
         INSERT INTO income (user_id, description, amount, date)
-        VALUES (${entry.user_id},${entry.description}, ${entry.amount}, ${entry.date})
+        VALUES (${entry.user_id}, ${entry.description}, ${entry.amount}, ${entry.date}::date)
         ON CONFLICT (id) DO NOTHING;
       `,
     ),
@@ -73,7 +73,7 @@ async function seedExpense() {
     expense.map(
       (entry) => sql`
         INSERT INTO expense (user_id, description, amount, date)
-        VALUES (${entry.user_id},${entry.description}, ${entry.amount}, ${entry.date})
+        VALUES (${entry.user_id}, ${entry.description}, ${entry.amount}, ${entry.date}::date)
         ON CONFLICT (id) DO NOTHING;
       `,
     ),

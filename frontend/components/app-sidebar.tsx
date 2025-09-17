@@ -14,7 +14,6 @@ import ExpenzLogo from "./ui/expenz-logo";
 import {
   LayoutGrid,
   BriefcaseBusiness,
-  BanknoteArrowDown,
   Menu,
   Power,
 } from "lucide-react";
