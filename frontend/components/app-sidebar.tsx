@@ -10,30 +10,31 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import ExpenzLogo from "./ui/expenz-logo";
 import {
-  LayoutGrid,
-  BriefcaseBusiness,
-  Menu,
-  Power,
-} from "lucide-react";
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import ExpenzLogo from "./ui/expenz-logo";
+import { LayoutGrid, BriefcaseBusiness, Menu, Power } from "lucide-react";
 import Link from "next/link";
+import { logout } from "@/lib/auth";
 
 const navlinks = [
   {
     title: "Dashboard",
     url: "/dashboard",
-    icon: <LayoutGrid  />,
+    icon: <LayoutGrid />,
   },
   {
     title: "Income",
     url: "/dashboard/income",
-    icon: <BriefcaseBusiness  />,
+    icon: <BriefcaseBusiness />,
   },
   {
     title: "Expense",
     url: "/dashboard/expense",
-    icon: <Menu  />,
+    icon: <Menu />,
   },
 ];
 
@@ -62,9 +63,23 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <Button variant="secondary" size="icon" className="size-8">
-          <Power />
-        </Button>
+        <form action={logout}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                type="submit"
+                variant="secondary"
+                size="icon"
+                className="size-8"
+              >
+                <Power />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Logout</p>
+            </TooltipContent>
+          </Tooltip>
+        </form>
       </SidebarFooter>
     </Sidebar>
   );

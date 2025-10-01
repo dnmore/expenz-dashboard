@@ -1,8 +1,6 @@
-import postgres from "postgres";
 import { Transaction, LatestTransactionRaw } from "./definitions";
 import { formatCurrency } from "./utils";
-
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: "require" });
+import sql from "./db";
 
 export async function fetchIncome(userId: string) {
   try {
@@ -14,8 +12,8 @@ export async function fetchIncome(userId: string) {
     `;
 
     return incomeEntries;
-  } catch (err) {
-    console.error("Database Error:", err);
+  } catch (error) {
+    console.error("Database Error:", error);
     throw new Error("Failed to fetch income entries.");
   }
 }
@@ -30,8 +28,8 @@ export async function fetchExpense(userId: string) {
     `;
 
     return expenseEntries;
-  } catch (err) {
-    console.error("Database Error:", err);
+  } catch (error) {
+    console.error("Database Error:", error);
     throw new Error("Failed to fetch expense entries.");
   }
 }
@@ -103,8 +101,8 @@ export async function fetchLatestEntries(userId: string) {
       latestIncomeEntries,
       latestExpenseEntries,
     };
-  } catch (err) {
-    console.error("Database Error:", err);
+  } catch (error) {
+    console.error("Database Error:", error);
     throw new Error("Failed to fetch latest entries.");
   }
 }
@@ -152,4 +150,3 @@ export async function fetchExpenseById(id: string, userId: string) {
     throw new Error("Failed to fetch expense entry.");
   }
 }
-

@@ -24,7 +24,6 @@ async function listExpense() {
   return data;
 }
 
-
 // export async function GET() {
 //   try {
 //     return Response.json(await listExpense());
@@ -61,12 +60,20 @@ async function listExpenseForUser(userId: string) {
   return data;
 }
 
+//##############################################################//
+// return userId for a provided email identifier
 
+async function getUserIdByEmail(identifier: string) {
+  const data = await sql`
+  SELECT id FROM users WHERE email = ${identifier} LIMIT 1`;
+
+  return data;
+}
 
 export async function GET() {
   try {
-    const userId = '5db65b42-7401-4890-9017-68a4ad6f0884';
-    return Response.json(await listExpenseForUser(userId));
+    const emailIdentifier = "john@demo.com";
+    return Response.json(await getUserIdByEmail(emailIdentifier));
   } catch (error) {
     return Response.json({ error }, { status: 500 });
   }
