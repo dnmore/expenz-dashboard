@@ -1,10 +1,12 @@
-'use client'
-import { Transaction } from "@/lib/definitions"
-import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown } from "lucide-react"
-import { MoreHorizontal } from "lucide-react"
- 
-import { Button } from "@/components/ui/button"
+"use client";
+
+import { Transaction } from "@/lib/definitions";
+import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
+import Link from "next/link";
+import { DeleteIncome } from "@/components/ui/delete-button";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,79 +14,54 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Checkbox } from "@/components/ui/checkbox"
+} from "@/components/ui/dropdown-menu";
+
+import { formatCurrency } from "@/lib/utils";
 
 export const columns: ColumnDef<Transaction>[] = [
-     {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-    {
-        accessorKey:'description',
-        header: ({ column }) => {
+  {
+    accessorKey: "description",
+    header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-         Description
+          Description
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
-    },
-    {
-        accessorKey:'amount',
-        header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
-      const formatted = new Intl.NumberFormat("en-GB", {
-        style: "currency",
-        currency: "EUR",
-      }).format(amount)
- 
-      return <div className="text-right font-medium">{formatted}</div>
-    },
-        
-    },
-    {
-  accessorKey: "date",
-  header: "Date",
-  cell: ({ row }) => {
-    const raw = row.getValue("date") as string
-    const date = new Date(raw)
-    const formatted = date.toLocaleDateString("en-GB", {
-      year: "numeric",
-      month: "short",
-      day: "2-digit",
-    })
-    return <div>{formatted}</div>
   },
-},
-     {
+  {
+    accessorKey: "amount",
+    header: () => <div className="text-right">Amount</div>,
+    cell: ({ row }) => {
+      const amount = parseFloat(row.getValue("amount"));
+      const formatted = formatCurrency(amount);
+
+      return <div className="text-right font-medium">{formatted}</div>;
+    },
+  },
+  {
+    accessorKey: "date",
+    header: "Date",
+    cell: ({ row }) => {
+      const raw = row.getValue("date") as string;
+      const date = new Date(raw);
+      const formatted = date.toLocaleDateString("en-GB", {
+        year: "numeric",
+        month: "short",
+        day: "2-digit",
+      });
+      return <div>{formatted}</div>;
+    },
+  },
+  {
     id: "actions",
     cell: ({ row }) => {
-      const incomeEntry = row.original
- 
+      const income = row.original;
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -95,19 +72,17 @@ export const columns: ColumnDef<Transaction>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(incomeEntry.id)}
-            >
-              Copy payment ID
+
+            <DropdownMenuItem>
+              <Link href={`/dashboard/income/${income.id}/edit`}>
+                Edit entry
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DeleteIncome id={income.id} />
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
-
-]
-
+];
