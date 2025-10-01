@@ -3,8 +3,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { JSX } from "react";
 import { Suspense } from "react";
 import { SkeletonCard } from "./skeletons";
-import { EntriesBarChartDisplay } from "./entriesBarChartDisplay";
 import { LatestEntries } from "./latestEntries";
+import { getUserId } from "@/lib/auth";
+import { BarChart } from "./barChart";
+
 export function DashboardCard({
   title,
   content,
@@ -29,8 +31,11 @@ export function DashboardCard({
 }
 
 export async function DashboardTotalCards() {
+  const userIdCookie = await getUserId();
+  const userId = userIdCookie?.value;
+  if (!userId) return null;
   const { totalOfIncome, totalOfExpense, totalBalance } = await fetchCardsData(
-    "5db65b42-7401-4890-9017-68a4ad6f0884"
+    userId
   );
 
   return (
@@ -42,40 +47,51 @@ export async function DashboardTotalCards() {
   );
 }
 
-export async function DashboardChartCard() {
-  const { chartIncomeData, chartExpenseData } = await fetchCardsData(
-    "5db65b42-7401-4890-9017-68a4ad6f0884"
-  );
+export async function DashboardBarChartCard() {
+  const userIdCookie = await getUserId();
+  const userId = userIdCookie?.value;
+  if (!userId) return null;
+  const { chartIncomeData, chartExpenseData } = await fetchCardsData(userId);
 
-  const chartdata = [
+  const barChartdata = [
     {
-      name: "Income",
-      "Total of transactions": chartIncomeData ?? 0,
-    },
-    {
-      name: "Expense",
-      "Total of transactions": chartExpenseData ?? 0,
+      name: "Total of transactions",
+      Income: chartIncomeData ?? 0,
+      Expense: chartExpenseData ?? 0,
     },
   ];
 
   return (
     <>
       <DashboardCard
-        title="Total overview"
-        content={<EntriesBarChartDisplay chartdata={chartdata} />}
+        title="Total Overview"
+        content={
+          <BarChart
+            data={barChartdata}
+            index="name"
+            categories={["Income", "Expense"]}
+            barCategoryGap={"30%"}
+            colors={["emerald", "pink"]}
+            legendPosition="left"
+          />
+        }
       />
     </>
   );
 }
 
 export async function DashboardLatestEntriesCard() {
+  const userIdCookie = await getUserId();
+  const userId = userIdCookie?.value;
+  if (!userId) return null;
+
   const { latestIncomeEntries, latestExpenseEntries } =
-    await fetchLatestEntries("5db65b42-7401-4890-9017-68a4ad6f0884");
+    await fetchLatestEntries(userId);
 
   return (
     <>
       <DashboardCard
-        title="Latest entries"
+        title="Latest Entries"
         content={
           <LatestEntries
             latestIncomeEntries={latestIncomeEntries}

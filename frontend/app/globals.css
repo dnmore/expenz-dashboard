@@ -245,7 +245,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-.list > div:nth-child(even) {
-  background-color: #faf5f5;
-}
