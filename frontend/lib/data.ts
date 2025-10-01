@@ -10,7 +10,7 @@ export async function fetchIncome(userId: string) {
      SELECT id, description, amount, date
      FROM income
      WHERE user_id = ${userId}
-     ORDER BY date ASC
+     ORDER BY date DESC
     `;
 
     return incomeEntries;
@@ -26,7 +26,7 @@ export async function fetchExpense(userId: string) {
        SELECT id, description, amount, date
      FROM expense
      WHERE user_id = ${userId}
-     ORDER BY date ASC
+     ORDER BY date DESC
     `;
 
     return expenseEntries;
@@ -108,3 +108,48 @@ export async function fetchLatestEntries(userId: string) {
     throw new Error("Failed to fetch latest entries.");
   }
 }
+
+export async function fetchIncomeById(id: string, userId: string) {
+  try {
+    const data = await sql<Transaction[]>`
+     SELECT id, description, amount, date
+     FROM income
+     WHERE user_id = ${userId}
+     AND id = ${id}
+     
+    `;
+
+    const incomeEntry = data.map((entry) => ({
+      ...entry,
+      amount: entry.amount / 100,
+    }));
+
+    return incomeEntry[0];
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch income entry.");
+  }
+}
+
+export async function fetchExpenseById(id: string, userId: string) {
+  try {
+    const data = await sql<Transaction[]>`
+     SELECT id, description, amount, date
+     FROM expense
+     WHERE user_id = ${userId}
+     AND id = ${id}
+     
+    `;
+
+    const expenseEntry = data.map((entry) => ({
+      ...entry,
+      amount: entry.amount / 100,
+    }));
+
+    return expenseEntry[0];
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch expense entry.");
+  }
+}
+

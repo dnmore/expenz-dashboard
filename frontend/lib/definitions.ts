@@ -19,7 +19,6 @@ export type LatestTransaction = {
   amount: string;
 };
 
-
-export type LatestTransactionRaw = Omit<LatestTransaction, 'amount'> & {
+export type LatestTransactionRaw = Omit<LatestTransaction, "amount"> & {
   amount: number;
 };
