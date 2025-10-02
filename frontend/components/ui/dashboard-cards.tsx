@@ -72,7 +72,8 @@ export async function DashboardBarChartCard() {
             categories={["Income", "Expense"]}
             barCategoryGap={"30%"}
             colors={["emerald", "pink"]}
-            legendPosition="left"
+            showLegend={false}
+            
           />
         }
       />

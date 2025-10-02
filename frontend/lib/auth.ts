@@ -4,8 +4,6 @@ import sql from "./db";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-
-
 export async function login(identifier: string) {
   try {
     const data = await sql<{ id: string }[]>`
@@ -25,12 +23,11 @@ export async function login(identifier: string) {
       secure: true,
       path: "/",
     });
-
-    redirect("/dashboard");
   } catch (error) {
     console.error("Database Error:", error);
-    throw error;
+    return { message: "Database Error: Failed to Login." };
   }
+  redirect("/dashboard");
 }
 
 export async function logout() {
