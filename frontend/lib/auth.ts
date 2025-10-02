@@ -1,11 +1,10 @@
 "use server";
 
-import postgres from "postgres";
+import sql from "./db";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: "require" });
 
 export async function login(identifier: string) {
   try {

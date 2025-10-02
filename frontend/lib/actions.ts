@@ -74,6 +74,7 @@ export async function createIncome(prevState: State, formData: FormData) {
 INSERT INTO income (user_id, description, amount, date)
 VALUES (${userId}, ${description}, ${amountInCents},${date})`;
   } catch (error) {
+    console.error("Database Error:", error);
     return {
       message: "Database Error: Failed to Create Income entry.",
     };
@@ -118,6 +119,7 @@ export async function createExpense(prevState: State, formData: FormData) {
 INSERT INTO expense (user_id, description, amount, date)
 VALUES (${userId}, ${description}, ${amountInCents},${date})`;
   } catch (error) {
+    console.error("Database Error:", error);
     return {
       message: "Database Error: Failed to Create Expense entry.",
     };
@@ -157,6 +159,7 @@ UPDATE income
 SET description=${description}, amount=${amountInCents}
 WHERE id=${id}`;
   } catch (error) {
+    console.error("Database Error:", error);
     return { message: "Database Error: Failed to Update Income." };
   }
 
@@ -194,6 +197,7 @@ UPDATE expense
 SET description=${description}, amount=${amountInCents}
 WHERE id=${id}`;
   } catch (error) {
+    console.error("Database Error:", error);
     return { message: "Database Error: Failed to Update Expense." };
   }
 

@@ -1,5 +1,4 @@
 import { deleteIncome, deleteExpense } from "@/lib/actions";
-import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
   AlertDialogAction,
