@@ -5,7 +5,7 @@ import { fetchExpense } from "@/lib/data";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { getUserId } from "@/lib/auth";
-import { Menu } from "lucide-react";
+
 
 export const metadata: Metadata = {
   title: 'Expense',
@@ -19,8 +19,8 @@ export default async function Page() {
 
   return (
     <div className="pt-6">
-      <h1 className="mb-2 text-md md:text-lg flex gap-1.5 items-center ml-1">
-        <Menu size={18} /> <span>Expense</span>
+      <h1 className="mb-2 text-xl md:text-2xl  ml-1">
+        Expense
       </h1>
       <div className="flex items-start justify-baseline gap-2 md:mt-8">
         <Button size={'lg'} asChild >

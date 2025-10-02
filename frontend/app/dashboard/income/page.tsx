@@ -5,7 +5,7 @@ import { fetchIncome } from "@/lib/data";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { getUserId } from "@/lib/auth";
-import { BriefcaseBusiness } from "lucide-react";
+
 
 export const metadata: Metadata = {
   title: 'Income',
@@ -20,8 +20,8 @@ export default async function Page() {
   const incomeItems = await fetchIncome(userId);
   return (
     <div className="pt-6">
-      <h1 className="mb-2 text-md md:text-lg flex gap-1.5 items-center ml-1">
-        <BriefcaseBusiness size={18} /> <span>Income</span>
+      <h1 className="mb-2 text-xl md:text-2xl  ml-1">
+        Income
       </h1>
       <div className="flex items-start justify-baseline gap-2 md:mt-8">
         <Button asChild size={"lg"}>

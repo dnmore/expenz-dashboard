@@ -16,7 +16,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import ExpenzLogo from "./ui/expenz-logo";
-import { LayoutGrid, BriefcaseBusiness, Menu, Power } from "lucide-react";
+import { LayoutGrid, BriefcaseBusiness, ReceiptText, Power } from "lucide-react";
 import Link from "next/link";
 import { logout } from "@/lib/auth";
 
@@ -34,7 +34,7 @@ const navlinks = [
   {
     title: "Expense",
     url: "/dashboard/expense",
-    icon: <Menu />,
+    icon: <ReceiptText />,
   },
 ];
 

@@ -28,7 +28,7 @@ export function DeleteIncome({ id }: { id: string }) {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>{" "}
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
           <form action={deleteIncomeWithId}>
             <AlertDialogAction type="submit">Continue</AlertDialogAction>
           </form>

@@ -10,7 +10,7 @@ import {
   SkeletonChart,
   SkeletonLatestEntries,
 } from "@/components/ui/skeletons";
-import { LayoutGrid } from "lucide-react";
+
 
 export const metadata: Metadata = {
   title: 'Dashboard',
@@ -19,8 +19,8 @@ export const metadata: Metadata = {
 export default async function Page() {
   return (
     <div className="pt-6">
-      <h1 className="mb-2 text-md md:text-lg flex gap-1.5 items-center ml-1">
-        <LayoutGrid size={18} /> <span>Dashboard</span>
+      <h1 className="mb-2 text-xl md:text-2xl  ml-1">
+        Dashboard
       </h1>
       <div className="container mx-auto py-5">
         <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-3">
