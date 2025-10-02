@@ -1,13 +1,12 @@
 import ExpenzLogo from "../components/ui/expenz-logo";
 import * as motion from "motion/react-client";
 import { Button } from "@/components/ui/button";
-import { login } from "@/lib/auth";
+import { loginAsJohn, loginAsSarah } from "@/lib/auth";
 
 import { CornerDownLeft } from "lucide-react";
 
 export default function Page() {
-  const loginAsJohn = login.bind(null, "john@demo.com");
-  const loginAsSarah = login.bind(null, "sarah@demo.com");
+  
   return (
     <main className="flex min-h-screen flex-col gap-10 p-6">
       <div className="h-16 p-4">

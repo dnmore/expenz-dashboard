@@ -4,7 +4,7 @@ import sql from "./db";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export async function login(identifier: string) {
+export async function loginByEmail(identifier: string): Promise<void> {
   try {
     const data = await sql<{ id: string }[]>`
       SELECT id FROM users WHERE email = ${identifier} LIMIT 1
@@ -24,10 +24,18 @@ export async function login(identifier: string) {
       path: "/",
     });
   } catch (error) {
-    console.error("Database Error:", error);
-    return { message: "Database Error: Failed to Login." };
+    console.error("Login Error:", error);
+    throw error;
   }
   redirect("/dashboard");
+}
+
+export async function loginAsJohn(formData: FormData): Promise<void> {
+  await loginByEmail("john@demo.com");
+}
+
+export async function loginAsSarah(formData: FormData): Promise<void> {
+  await loginByEmail("sarah@demo.com");
 }
 
 export async function logout() {
