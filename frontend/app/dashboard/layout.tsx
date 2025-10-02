@@ -1,5 +1,5 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/app-sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/app-sidebar"
 import {
   Tooltip,
   TooltipContent,
@@ -11,17 +11,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <SidebarProvider>
       <AppSidebar />
       <main className="p-4 w-full">
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <SidebarTrigger />
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Open Sidebar</p>
-          </TooltipContent>
-        </Tooltip>
-
+        <SidebarTrigger />
         {children}
       </main>
     </SidebarProvider>
-  );
+  )
 }
