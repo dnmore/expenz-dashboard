@@ -15,3 +15,9 @@ export type LatestTransaction = {
 export type LatestTransactionRaw = Omit<LatestTransaction, "amount"> & {
   amount: number;
 };
+
+export type ExportTransaction = {
+  description: string;
+  amount: number;
+  date: string;
+};

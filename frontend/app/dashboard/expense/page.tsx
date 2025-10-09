@@ -5,10 +5,12 @@ import { fetchExpense } from "@/lib/data";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { getUserId } from "@/lib/auth";
-
+import { Suspense } from "react";
+import { SkeletonTable } from "@/components/ui/skeletons";
+import { ExportCsvButton } from "@/components/ui/export-button";
 
 export const metadata: Metadata = {
-  title: 'Expense',
+  title: "Expense",
 };
 
 export default async function Page() {
@@ -19,17 +21,21 @@ export default async function Page() {
 
   return (
     <div className="pt-6">
-      <h1 className="mb-2 text-xl md:text-2xl  ml-1">
-        Expense
-      </h1>
+      <h1 className="mb-2 text-xl md:text-2xl  ml-1">Expense</h1>
       <div className="flex items-start justify-baseline gap-2 md:mt-8">
-        <Button size={'lg'} asChild >
+        <Button size={"lg"} asChild>
           <Link href="/dashboard/expense/create">Add Expense</Link>
         </Button>
-        <Button size={'lg'} variant="outline">Export As Csv</Button>
+        <ExportCsvButton
+          endpoint="/api/export/expense"
+          filename="expense.csv"
+          label="Export Expense CSV"
+        />
       </div>
       <div className="container mx-auto py-10">
-        <DataTable columns={columns} data={expenseItems} />
+        <Suspense fallback={<SkeletonTable />}>
+          <DataTable columns={columns} data={expenseItems} />
+        </Suspense>
       </div>
     </div>
   );

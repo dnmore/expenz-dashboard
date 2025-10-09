@@ -1,10 +1,10 @@
-import { Transaction, LatestTransactionRaw } from "./definitions";
+import { Transaction, LatestTransactionRaw, ExportTransaction } from "./definitions";
 import { formatCurrency } from "./utils";
 import sql from "./db";
 
 export async function fetchIncome(userId: string) {
   try {
-    const incomeEntries = await sql<Transaction[]>`
+    const incomeEntries = await sql<Transaction[]> `
      SELECT id, description, amount, date
      FROM income
      WHERE user_id = ${userId}
@@ -148,5 +148,58 @@ export async function fetchExpenseById(id: string, userId: string) {
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch expense entry.");
+  }
+}
+
+
+export async function fetchExportIncome(userId: string) {
+  try {
+    const incomeData = await sql<ExportTransaction[]> `
+     SELECT description, amount, date
+     FROM income
+     WHERE user_id = ${userId}
+     ORDER BY date ASC
+    `;
+
+    const incomeEntries = incomeData.map((entry) => ({
+      ...entry,
+      amount: entry.amount / 100,
+      date: new Date(entry.date).toLocaleDateString("en-GB", {
+        year: "numeric",
+        month: "short",
+        day: "2-digit",
+      })
+    }));
+
+    return incomeEntries;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch income entries.");
+  }
+}
+
+export async function fetchExportExpense(userId: string) {
+  try {
+    const expenseData = await sql<ExportTransaction[]> `
+     SELECT description, amount, date
+     FROM expense
+     WHERE user_id = ${userId}
+     ORDER BY date ASC
+    `;
+
+    const expenseEntries = expenseData.map((entry) => ({
+      ...entry,
+      amount: entry.amount / 100,
+      date: new Date(entry.date).toLocaleDateString("en-GB", {
+        year: "numeric",
+        month: "short",
+        day: "2-digit",
+      })
+    }));
+
+    return expenseEntries;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch expense entries.");
   }
 }

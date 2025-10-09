@@ -5,12 +5,13 @@ import { fetchIncome } from "@/lib/data";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { getUserId } from "@/lib/auth";
-
+import { Suspense } from "react";
+import { SkeletonTable } from "@/components/ui/skeletons";
+import { ExportCsvButton } from "@/components/ui/export-button";
 
 export const metadata: Metadata = {
-  title: 'Income',
+  title: "Income",
 };
-
 
 export default async function Page() {
   const userIdCookie = await getUserId();
@@ -20,20 +21,18 @@ export default async function Page() {
   const incomeItems = await fetchIncome(userId);
   return (
     <div className="pt-6">
-      <h1 className="mb-2 text-xl md:text-2xl  ml-1">
-        Income
-      </h1>
+      <h1 className="mb-2 text-xl md:text-2xl  ml-1">Income</h1>
       <div className="flex items-start justify-baseline gap-2 md:mt-8">
         <Button asChild size={"lg"}>
           <Link href="/dashboard/income/create">Create Income</Link>
         </Button>
-        <Button size={"lg"} variant="outline">
-          Export As Csv
-        </Button>
+      <ExportCsvButton endpoint="/api/export/income" filename="income.csv" label="Export Income CSV"/>
       </div>
 
       <div className="container mx-auto py-10">
-        <DataTable columns={columns} data={incomeItems} />
+        <Suspense fallback={<SkeletonTable />}>
+          <DataTable columns={columns} data={incomeItems} />
+        </Suspense>
       </div>
     </div>
   );
