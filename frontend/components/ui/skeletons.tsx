@@ -78,3 +78,27 @@ export function SkeletonDashboard() {
     </>
   );
 }
+
+export function SkeletonTable() {
+  return (
+    <Skeleton className="flex flex-col gap-6 rounded-xl border py-6 shadow-sm">
+      <div className="flex items-center justify-between p-4">
+        <Skeleton className="h-8 w-32 rounded-xl bg-gray-200 ml-4" />
+        <Skeleton className="h-8 w-32 rounded-xl bg-gray-200 ml-4" />
+      </div>
+
+      <div className="space-y-4 p-4">
+        <Skeleton className="h-8 w-full bg-gray-200" />
+        <Skeleton className="h-8 w-full bg-gray-200" />
+        <Skeleton className="h-8 w-full bg-gray-200" />
+        <Skeleton className="h-8 w-full bg-gray-200" />
+        <Skeleton className="h-8 w-full bg-gray-200" />
+        <Skeleton className="h-8 w-full bg-gray-200" />
+        <Skeleton className="h-8 w-full bg-gray-200" />
+        <Skeleton className="h-8 w-full bg-gray-200" />
+        <Skeleton className="h-8 w-full bg-gray-200" />
+        <Skeleton className="h-8 w-full bg-gray-200" />
+      </div>
+    </Skeleton>
+  );
+}
