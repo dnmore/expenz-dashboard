@@ -4,6 +4,9 @@ import sql from "./db";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+const USER_JOHN_EMAIL = process.env.USER_JOHN_EMAIL || "";
+const USER_SARAH_EMAIL = process.env.USER_SARAH_EMAIL || "";
+
 export async function loginByEmail(identifier: string): Promise<void> {
   try {
     const data = await sql<{ id: string }[]>`
@@ -31,11 +34,11 @@ export async function loginByEmail(identifier: string): Promise<void> {
 }
 
 export async function loginAsJohn(formData: FormData): Promise<void> {
-  await loginByEmail("john@demo.com");
+  await loginByEmail(USER_JOHN_EMAIL);
 }
 
 export async function loginAsSarah(formData: FormData): Promise<void> {
-  await loginByEmail("sarah@demo.com");
+  await loginByEmail(USER_SARAH_EMAIL);
 }
 
 export async function logout() {
