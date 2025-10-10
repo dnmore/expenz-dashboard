@@ -16,7 +16,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import ExpenzLogo from "./ui/expenz-logo";
-import { LayoutGrid, BriefcaseBusiness, ReceiptText, Power } from "lucide-react";
+import {
+  LayoutGrid,
+  BriefcaseBusiness,
+  ReceiptText,
+  Power,
+} from "lucide-react";
 import Link from "next/link";
 import { logout } from "@/lib/auth";
 
@@ -72,6 +77,7 @@ export function AppSidebar() {
                 size="icon"
                 className="size-8"
               >
+                <span className="sr-only">Logout</span>
                 <Power />
               </Button>
             </TooltipTrigger>

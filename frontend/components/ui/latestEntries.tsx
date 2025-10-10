@@ -6,7 +6,7 @@ type LatestEntriesProps = {
 export const LatestEntries = (props: LatestEntriesProps) => {
   return (
     <div className="flex w-full flex-col md:col-span-4">
-      <h3 className="mb-2 text-sm md:text-md font-semibold">Income</h3>
+      <p className="mb-2 text-sm md:text-md font-semibold">Income</p>
       <ul className="flex grow flex-col justify-between p-4">
         {props.latestIncomeEntries.map((entry) => {
           return (
@@ -20,7 +20,7 @@ export const LatestEntries = (props: LatestEntriesProps) => {
           );
         })}
       </ul>
-      <h3 className="mb-2 text-sm md:text-md font-semibold">Expense</h3>
+      <p className="mb-2 text-sm md:text-md font-semibold">Expense</p>
       <ul className="flex grow flex-col justify-between p-4">
         {props.latestExpenseEntries.map((entry) => {
           return (
