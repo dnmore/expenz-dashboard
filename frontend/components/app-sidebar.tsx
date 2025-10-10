@@ -75,7 +75,7 @@ export function AppSidebar() {
                 <Power />
               </Button>
             </TooltipTrigger>
-            <TooltipContent>
+            <TooltipContent side="right">
               <p>Logout</p>
             </TooltipContent>
           </Tooltip>
