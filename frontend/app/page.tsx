@@ -8,7 +8,7 @@ import { CornerDownLeft } from "lucide-react";
 export default function Page() {
   
   return (
-    <main className="flex min-h-screen flex-col gap-10 p-6">
+    <div className="flex min-h-screen flex-col gap-10 p-6">
       <div className="h-16 p-4">
         <ExpenzLogo />
       </div>
@@ -54,6 +54,6 @@ export default function Page() {
           </div>
         </motion.div>
       </div>
-    </main>
+    </div>
   );
 }
