@@ -9,7 +9,8 @@ const USER_SARAH_EMAIL = process.env.USER_SARAH_EMAIL || "";
 
 export async function loginByEmail(identifier: string): Promise<void> {
   try {
-    const data = await sql<{ id: string }[]>`
+    const data = await sql<{ id: string }[]>
+    `
       SELECT id FROM users WHERE email = ${identifier} LIMIT 1
     `;
     if (data.length === 0) {
@@ -33,11 +34,11 @@ export async function loginByEmail(identifier: string): Promise<void> {
   redirect("/dashboard");
 }
 
-export async function loginAsJohn(formData: FormData): Promise<void> {
+export async function loginAsJohn(): Promise<void> {
   await loginByEmail(USER_JOHN_EMAIL);
 }
 
-export async function loginAsSarah(formData: FormData): Promise<void> {
+export async function loginAsSarah(): Promise<void> {
   await loginByEmail(USER_SARAH_EMAIL);
 }
 

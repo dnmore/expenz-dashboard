@@ -1,12 +1,10 @@
 import ExpenzLogo from "../components/ui/expenz-logo";
 import * as motion from "motion/react-client";
-import { Button } from "@/components/ui/button";
-import { loginAsJohn, loginAsSarah } from "@/lib/auth";
+import { LoginAsJohnForm, LoginAsSarahForm } from "@/components/ui/login-forms";
 
 import { CornerDownLeft } from "lucide-react";
 
 export default function Page() {
-  
   return (
     <div className="flex min-h-screen flex-col gap-10 p-6">
       <div className="h-16 p-4">
@@ -40,16 +38,8 @@ export default function Page() {
             </div>
 
             <div className="flex flex-col md:flex-row items-center justify-center  gap-4">
-              <form action={loginAsJohn}>
-                <Button type="submit" size={"lg"}>
-                  Login as John
-                </Button>
-              </form>
-              <form action={loginAsSarah}>
-                <Button variant={"outline"} size={"lg"} type="submit">
-                  Login as Sarah
-                </Button>
-              </form>
+              <LoginAsJohnForm />
+              <LoginAsSarahForm />
             </div>
           </div>
         </motion.div>
