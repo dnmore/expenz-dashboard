@@ -12,7 +12,7 @@ export default function CreateForm() {
   const [state, formAction] = useActionState(createIncome, initialState);
   return (
     <form action={formAction}>
-      <div className="rounded-md bg-gray-50 border border-gray-200 py-8 px-4 md:px-6 ">
+      <div className="rounded-md bg-zinc-50 border border-zinc-200 dark:bg-neutral-900 dark:border-zinc-600 py-8 px-4 md:px-6 ">
         <div className="mb-6">
           <Label htmlFor="description" className="mb-2">
             Description
@@ -23,7 +23,7 @@ export default function CreateForm() {
             name="description"
             placeholder="e.g. 'Stock Dividends'"
             aria-describedby="description-error"
-            className="bg-white"
+            
           />
           <div id="description-error" aria-live="polite" aria-atomic="true">
             {state.errors?.description &&
@@ -44,7 +44,7 @@ export default function CreateForm() {
             name="amount"
             placeholder="e.g. '200'"
             aria-describedby="amount-error"
-            className="bg-white"
+            
           />
           <div id="amount-error" aria-live="polite" aria-atomic="true">
             {state.errors?.amount &&
@@ -67,7 +67,7 @@ export default function CreateForm() {
         <Button asChild variant="outline">
           <Link
             href="/dashboard/income"
-            className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
+            
           >
             Cancel
           </Link>

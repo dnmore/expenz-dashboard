@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { logout } from "@/lib/auth";
+import { ModeToggle } from "./ui/mode-toggle";
 
 const navlinks = [
   {
@@ -49,7 +50,10 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>
-            <ExpenzLogo />
+            <div className="flex gap-16 items-center">
+              <ExpenzLogo />
+              <ModeToggle />
+            </div>
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>

@@ -1,27 +1,28 @@
 import ExpenzLogo from "../components/ui/expenz-logo";
 import * as motion from "motion/react-client";
 import { LoginAsJohnForm, LoginAsSarahForm } from "@/components/ui/login-forms";
-
 import { CornerDownLeft } from "lucide-react";
+import { ModeToggle } from "@/components/ui/mode-toggle";
 
 export default function Page() {
   return (
     <div className="flex min-h-screen flex-col gap-10 p-6">
-      <div className="h-16 p-4">
+      <div className="h-16 p-4 flex justify-between items-center">
         <ExpenzLogo />
+        <ModeToggle />
       </div>
-      <div className="flex flex-col justify-center items-center text-center py-8 bg-stone-50 border border-gray-200 rounded-xl">
+      <div className="flex flex-col justify-center items-center text-center py-8 bg-zinc-50 border border-zinc-200 dark:bg-neutral-900 dark:border-zinc-600 rounded-xl">
         <motion.div
           initial={{ opacity: 0, x: -200 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ type: "spring", duration: 1 }}
           className="flex flex-col items-center justify-center gap-5 "
         >
-          <div className="px-3 md:px-6 flex flex-col gap-4 justify-center items-center  max-w-2xl mx-auto">
-            <h1 className="font-bold text-4xl md:text-6xl">
+          <div className="px-3 md:px-6 flex flex-col gap-4 justify-center items-center  max-w-2xl mx-auto ">
+            <h1 className="font-bold text-4xl md:text-6xl text-zinc-950 dark:text-zinc-50">
               Track Your Expenses. Achieve Your Goals.
             </h1>
-            <p className="text-gray-700 text-base/8 md:text-xl/8">
+            <p className="text-gray-700 dark:text-gray-200 text-base/8 md:text-xl/8">
               Take control of your money with a clear dashboard and quick tools
               to add or edit income and expenses. Export your data anytime as
               CSV and stay on track to reach your goals.

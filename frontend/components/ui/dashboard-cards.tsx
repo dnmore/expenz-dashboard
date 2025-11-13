@@ -65,8 +65,9 @@ export async function DashboardBarChartCard() {
     <>
       <DashboardCard
         title="Total Overview"
-        content={
+         content={
           <BarChart
+          
             data={barChartdata}
             index="name"
             categories={["Income", "Expense"]}
