@@ -21,3 +21,9 @@ export type ExportTransaction = {
   amount: number;
   date: string;
 };
+
+export type SessionPayload = {
+  userId: string;
+  expiresAt: Date;
+
+}

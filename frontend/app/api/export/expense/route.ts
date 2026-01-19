@@ -1,9 +1,8 @@
-import { getUserId } from "@/lib/auth";
+import { getUserId } from "@/lib/session";
 import { fetchExportExpense } from "@/lib/data";
 
 export async function GET(request: Request) {
-  const userIdCookie = await getUserId();
-  const userId = userIdCookie?.value;
+  const userId = await getUserId();
   if (!userId) {
     return new Response(JSON.stringify({ error: "Not authenticated" }), {
       status: 401,
