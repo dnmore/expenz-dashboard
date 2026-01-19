@@ -4,19 +4,22 @@ import { DataTable } from "@/components/ui/data-table";
 import { fetchIncome } from "@/lib/data";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { getUserId } from "@/lib/auth";
+import { getUserId } from "@/lib/session";
 import { Suspense } from "react";
 import { SkeletonTable } from "@/components/ui/skeletons";
 import { ExportCsvButton } from "@/components/ui/export-button";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Income",
 };
 
 export default async function Page() {
-  const userIdCookie = await getUserId();
-  const userId = userIdCookie?.value;
-  if (!userId) return null;
+ const userId = await getUserId();
+  
+    if (!userId) {
+      redirect("/");
+    }
 
   const incomeItems = await fetchIncome(userId);
   return (

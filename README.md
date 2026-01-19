@@ -92,7 +92,7 @@ A dedicated FastAPI service powers CSV export functionality for income and expen
 
 ```bash
 
- cd services/csv-export
+ cd service/csv-export
  uvicorn api.main:app --reload
 
 ```

@@ -4,8 +4,10 @@ import { JSX } from "react";
 import { Suspense } from "react";
 import { SkeletonCard } from "./skeletons";
 import { LatestEntries } from "./latestEntries";
-import { getUserId } from "@/lib/auth";
+import { getUserId } from "@/lib/session";
 import { BarChart } from "./barChart";
+import { redirect } from "next/navigation";
+
 
 export function DashboardCard({
   title,
@@ -31,9 +33,12 @@ export function DashboardCard({
 }
 
 export async function DashboardTotalCards() {
-  const userIdCookie = await getUserId();
-  const userId = userIdCookie?.value;
-  if (!userId) return null;
+  
+   const userId = await getUserId();
+
+  if (!userId) {
+    redirect("/");
+  }
   const { totalOfIncome, totalOfExpense, totalBalance } = await fetchCardsData(
     userId
   );
@@ -48,9 +53,12 @@ export async function DashboardTotalCards() {
 }
 
 export async function DashboardBarChartCard() {
-  const userIdCookie = await getUserId();
-  const userId = userIdCookie?.value;
-  if (!userId) return null;
+ 
+  const userId = await getUserId();
+
+  if (!userId) {
+    redirect("/");
+  }
   const { chartIncomeData, chartExpenseData } = await fetchCardsData(userId);
 
   const barChartdata = [
@@ -83,9 +91,12 @@ export async function DashboardBarChartCard() {
 }
 
 export async function DashboardLatestEntriesCard() {
-  const userIdCookie = await getUserId();
-  const userId = userIdCookie?.value;
-  if (!userId) return null;
+ 
+   const userId = await getUserId();
+
+  if (!userId) {
+    redirect("/");
+  }
 
   const { latestIncomeEntries, latestExpenseEntries } =
     await fetchLatestEntries(userId);

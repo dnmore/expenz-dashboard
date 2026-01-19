@@ -12,11 +12,13 @@ import {
 } from "@/components/ui/skeletons";
 
 
+
 export const metadata: Metadata = {
   title: 'Dashboard',
 };
 
 export default async function Page() {
+ 
   return (
     <div className="pt-6">
       <h1 className="mb-2 text-xl md:text-2xl  ml-1">

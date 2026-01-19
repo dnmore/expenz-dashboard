@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { getUserId } from "@/lib/auth";
+import { getUserId } from "@/lib/session";
 import sql from "./db";
 
 
@@ -41,8 +41,9 @@ export type State = {
 };
 
 export async function createIncome(prevState: State, formData: FormData) {
-  const userIdCookie = await getUserId();
-  const userId = userIdCookie?.value;
+  const userId = await getUserId();
+  
+    
   if (!userId) {
     return {
       message: "User not authenticated. Please log in.",
@@ -85,8 +86,9 @@ VALUES (${userId}, ${description}, ${amountInCents},${date})`;
 }
 
 export async function createExpense(prevState: State, formData: FormData) {
-  const userIdCookie = await getUserId();
-  const userId = userIdCookie?.value;
+  const userId = await getUserId();
+  
+    
 
   if (!userId) {
     return {
