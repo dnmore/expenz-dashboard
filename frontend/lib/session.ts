@@ -4,14 +4,23 @@ import { SessionPayload } from "./definitions";
 import { cookies } from "next/headers";
 
 const secretKey = process.env.SESSION_SECRET;
+
+if (!secretKey) {
+  throw new Error("SESSION_SECRET is not defined");
+}
 const encodedKey = new TextEncoder().encode(secretKey);
 
 export async function encrypt(payload: SessionPayload) {
-  return new SignJWT(payload)
-    .setProtectedHeader({ alg: "HS256" })
-    .setIssuedAt()
-    .setExpirationTime("1d")
-    .sign(encodedKey);
+  try {
+    return await new SignJWT(payload)
+      .setProtectedHeader({ alg: "HS256" })
+      .setIssuedAt()
+      .setExpirationTime("1d")
+      .sign(encodedKey);
+  } catch (error) {
+    console.error("Session encryption failed:", error);
+    throw new Error("Failed to encrypt session");
+  }
 }
 
 export async function decrypt(
@@ -19,25 +28,34 @@ export async function decrypt(
 ): Promise<SessionPayload | null> {
   if (!session) return null;
 
-  const { payload } = await jwtVerify<SessionPayload>(session, encodedKey, {
-    algorithms: ["HS256"],
-  });
+  try {
+    const { payload } = await jwtVerify<SessionPayload>(session, encodedKey, {
+      algorithms: ["HS256"],
+    });
 
-  return payload;
+    return payload;
+  } catch (error) {
+    console.error("Session decryption failed:", error);
+    return null;
+  }
 }
 
 export async function createSession(userId: string) {
-  const expiresAt = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
-  const session = await encrypt({ userId, expiresAt });
-  const cookieStore = await cookies();
+  try {
+    const expiresAt = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
+    const session = await encrypt({ userId, expiresAt });
+    const cookieStore = await cookies();
 
-  cookieStore.set("session", session, {
-    httpOnly: true,
-    secure: true,
-    expires: expiresAt,
-    sameSite: "lax",
-    path: "/",
-  });
+    cookieStore.set("session", session, {
+      httpOnly: true,
+      secure: true,
+      expires: expiresAt,
+      sameSite: "lax",
+      path: "/",
+    });
+  } catch (error) {
+    console.error("Session creation failed:", error);
+  }
 }
 
 export async function deleteSession() {
