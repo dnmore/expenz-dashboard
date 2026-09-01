@@ -7,7 +7,7 @@ import { ModeToggle } from "@/components/ui/mode-toggle";
 
 export default function Page() {
   return (
-    <div className="flex min-h-screen flex-col gap-10 p-6">
+    <div className="flex flex-col gap-10 p-6">
       <div className="h-16 p-4 flex justify-between items-center">
         <ExpenzLogo />
         <ModeToggle />
