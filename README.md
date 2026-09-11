@@ -13,11 +13,6 @@ It provides an intuitive dashboard showcasing income, expenses, budget and insig
 Two built-in demo accounts allow users to explore the full experience instantly—no signup or data entry required.
 A dedicated FastAPI service powers CSV export functionality for income and expense records.
 
-## Demo
-
-[Live Demo](https://expenz-tracker-dashboard.vercel.app/)
-
-
 ## Table of Contents
 
 - [Preview](#preview)
