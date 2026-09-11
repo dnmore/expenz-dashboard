@@ -1,5 +1,5 @@
 import { fetchCardsData, fetchLatestEntries } from "@/lib/data";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { JSX } from "react";
 import { Suspense } from "react";
 import { SkeletonCard } from "./skeletons";
@@ -19,13 +19,12 @@ export function DashboardCard({
   return (
     <>
       <Suspense fallback={<SkeletonCard />}>
-        <Card>
+        <Card className="bg-gradient-to-t from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900">
           <CardHeader>
-            <CardTitle>{title}</CardTitle>
+            <CardDescription>{title}</CardDescription>
+            <CardTitle className="text-2xl font-semibold" >{content}</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div>{content}</div>
-          </CardContent>
+          
         </Card>
       </Suspense>
     </>
@@ -80,7 +79,7 @@ export async function DashboardBarChartCard() {
             index="name"
             categories={["Income", "Expense"]}
             barCategoryGap={"30%"}
-            colors={["emerald", "pink"]}
+            colors={["blue", "gray"]}
             showLegend={false}
             
           />
