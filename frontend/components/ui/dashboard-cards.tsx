@@ -19,7 +19,7 @@ export function DashboardCard({
   return (
     <>
       <Suspense fallback={<SkeletonCard />}>
-        <Card className="bg-gradient-to-t from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900">
+        <Card>
           <CardHeader>
             <CardDescription>{title}</CardDescription>
             <CardTitle className="text-2xl font-semibold" >{content}</CardTitle>

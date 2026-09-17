@@ -59,8 +59,8 @@ export function AppSidebar() {
             <SidebarMenu>
               {navlinks.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link href={item.url}>
+                  <SidebarMenuButton asChild variant="outline">
+                    <Link href={item.url} className="text-muted-foreground text-sm">
                       {item.icon}
                       <span>{item.title}</span>
                     </Link>
@@ -72,23 +72,17 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <form action={logout}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                type="submit"
-                variant="secondary"
-                size="icon"
-                className="size-8"
-              >
-                <span className="sr-only">Logout</span>
-                <Power />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="right">
-              <p>Logout</p>
-            </TooltipContent>
-          </Tooltip>
+        
+        <form action={logout} className="flex items-center gap-2">
+          <Button
+            type="submit"
+            variant="secondary"
+            size="icon"
+            className="size-8"
+          >
+            <Power />
+          </Button>
+          <span>Logout</span>
         </form>
       </SidebarFooter>
     </Sidebar>
