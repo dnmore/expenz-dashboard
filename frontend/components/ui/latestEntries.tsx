@@ -12,7 +12,7 @@ export const LatestEntries = (props: LatestEntriesProps) => {
           return (
             <li
               key={entry.id}
-              className="mb-2 flex justify-between border-b pb-2 text-xs md:text-sm"
+              className="mb-2 flex justify-between border-b pb-2 font-normal text-xs md:text-sm"
             >
               <span>{entry.description}</span>
               <span>{entry.amount}</span>
@@ -26,7 +26,7 @@ export const LatestEntries = (props: LatestEntriesProps) => {
           return (
             <li
               key={entry.id}
-              className="mb-2 flex justify-between border-b pb-2 text-xs md:text-sm"
+              className="mb-2 flex justify-between border-b pb-2 font-normal text-xs md:text-sm"
             >
               <span>{entry.description}</span>
               <span>{entry.amount}</span>
