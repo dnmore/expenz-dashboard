@@ -59,8 +59,11 @@ export function AppSidebar() {
             <SidebarMenu>
               {navlinks.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild variant="outline">
-                    <Link href={item.url} className="text-muted-foreground text-sm">
+                  <SidebarMenuButton asChild>
+                    <Link
+                      href={item.url}
+                      className="text-muted-foreground text-sm"
+                    >
                       {item.icon}
                       <span>{item.title}</span>
                     </Link>
@@ -72,17 +75,11 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        
         <form action={logout} className="flex items-center gap-2">
-          <Button
-            type="submit"
-            variant="secondary"
-            size="icon"
-            className="size-8"
-          >
+          <Button type="submit" size="icon">
             <Power />
           </Button>
-          <span>Logout</span>
+          <span className="text-muted-foreground text-sm">Logout</span>
         </form>
       </SidebarFooter>
     </Sidebar>
