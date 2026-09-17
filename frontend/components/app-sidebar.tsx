@@ -62,7 +62,7 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild>
                     <Link
                       href={item.url}
-                      className="text-muted-foreground text-sm"
+                      className="text-sm"
                     >
                       {item.icon}
                       <span>{item.title}</span>
