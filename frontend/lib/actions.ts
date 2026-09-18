@@ -3,10 +3,8 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { getUserId } from "@/lib/session";
+import { getUserId, requireMutation } from "@/lib/session";
 import sql from "./db";
-
-
 
 const FormSchema = z.object({
   id: z.string(),
@@ -23,7 +21,7 @@ const FormSchema = z.object({
 const CreateTransaction = FormSchema.omit({
   id: true,
   date: true,
-  user_id: true
+  user_id: true,
 });
 
 const UpdateTransaction = FormSchema.omit({
@@ -41,15 +39,9 @@ export type State = {
 };
 
 export async function createIncome(prevState: State, formData: FormData) {
-  const userId = await getUserId();
-  
-    
-  if (!userId) {
-    return {
-      message: "User not authenticated. Please log in.",
-    };
-  }
+  await requireMutation();
 
+  const userId = await getUserId();
   const validatedFields = CreateTransaction.safeParse({
     description: formData.get("description"),
     amount: formData.get("amount"),
@@ -86,15 +78,8 @@ VALUES (${userId}, ${description}, ${amountInCents},${date})`;
 }
 
 export async function createExpense(prevState: State, formData: FormData) {
+  await requireMutation();
   const userId = await getUserId();
-  
-    
-
-  if (!userId) {
-    return {
-      message: "User not authenticated. Please log in.",
-    };
-  }
 
   const validatedFields = CreateTransaction.safeParse({
     description: formData.get("description"),
@@ -134,8 +119,10 @@ VALUES (${userId}, ${description}, ${amountInCents},${date})`;
 export async function updateIncome(
   id: string,
   prevState: State,
-  formData: FormData
+  formData: FormData,
 ) {
+
+  await requireMutation()
   const validatedFields = UpdateTransaction.safeParse({
     description: formData.get("description"),
     amount: formData.get("amount"),
@@ -172,8 +159,10 @@ WHERE id=${id}`;
 export async function updateExpense(
   id: string,
   prevState: State,
-  formData: FormData
+  formData: FormData,
 ) {
+
+  await requireMutation()
   const validatedFields = UpdateTransaction.safeParse({
     description: formData.get("description"),
     amount: formData.get("amount"),
@@ -208,11 +197,13 @@ WHERE id=${id}`;
 }
 
 export async function deleteIncome(id: string) {
+  await requireMutation()
   await sql`DELETE FROM income WHERE id = ${id}`;
   revalidatePath("/dashboard/income");
 }
 
 export async function deleteExpense(id: string) {
+  await requireMutation();
   await sql`DELETE FROM expense WHERE id = ${id}`;
   revalidatePath("/dashboard/expense");
 }
