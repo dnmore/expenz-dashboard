@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { updateIncome, State } from "@/lib/actions";
 import { Transaction } from "@/lib/definitions";
+import { DEMO_MODE} from "@/lib/config"
 
 export default function EditForm({ income }: { income: Transaction }) {
   const updateIncomeWithId = updateIncome.bind(null, income.id);
@@ -76,7 +77,7 @@ export default function EditForm({ income }: { income: Transaction }) {
           </Link>
         </Button>
 
-        <Button type="submit">
+        <Button type="submit" disabled={DEMO_MODE}>
           Edit Income
         </Button>
       </div>

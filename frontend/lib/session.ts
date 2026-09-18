@@ -2,6 +2,8 @@ import "server-only";
 import { SignJWT, jwtVerify } from "jose";
 import { SessionPayload } from "./definitions";
 import { cookies } from "next/headers";
+import sql from "./db";
+import { DEMO_MODE } from "./config";
 
 const secretKey = process.env.SESSION_SECRET;
 
@@ -71,5 +73,22 @@ export async function getSessionPayload(): Promise<SessionPayload | null> {
 
 export async function getUserId(): Promise<string | null> {
   const payload = await getSessionPayload();
-  return payload?.userId ?? null;
+  if(!payload?.userId) return null
+  return payload?.userId
+}
+export async function getCurrentUser() {
+  const payload = await getSessionPayload();
+  if(!payload?.userId) return null
+  return {
+    userId: payload.userId,
+    isDemo: DEMO_MODE
+  }
+}
+
+export async function requireMutation(){
+  const userId = await getCurrentUser();
+  if (!userId?.userId || userId.isDemo) {
+    throw new Error("Unauthorized");
+  }
+  return userId;
 }

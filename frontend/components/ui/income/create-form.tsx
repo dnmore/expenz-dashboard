@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { createIncome, State } from "@/lib/actions";
+import { DEMO_MODE} from "@/lib/config"
 
 export default function CreateForm() {
   const initialState: State = { message: null, errors: {} };
@@ -73,7 +74,7 @@ export default function CreateForm() {
           </Link>
         </Button>
 
-        <Button type="submit">
+        <Button type="submit" disabled={DEMO_MODE}>
           Create Income
         </Button>
       </div>
