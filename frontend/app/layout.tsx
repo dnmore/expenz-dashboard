@@ -24,15 +24,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${outfit.className} antialiased min-h-screen flex-col`}>
+      <body className={`${outfit.className} antialiased min-h-screen`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
-        ><div className="min-h-screen flex flex-col">
-          <main className="flex-1">{children}</main>
-          <Footer /></div>
+        >
+          <div className="min-h-screen flex flex-col">
+            <main className="flex-1 bg-gradient-to-b from-primary/5">{children}</main>
+            <Footer />
+          </div>
         </ThemeProvider>
       </body>
     </html>

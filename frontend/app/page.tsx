@@ -4,15 +4,14 @@ import { LoginAsJohnForm, LoginAsSarahForm } from "@/components/ui/login-forms";
 import { CornerDownLeft } from "lucide-react";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 
-
 export default function Page() {
   return (
-    <div className="flex flex-col gap-10 p-6">
+    <div className="flex flex-col p-6">
       <div className="h-16 p-4 flex justify-between items-center">
         <ExpenzLogo />
         <ModeToggle />
       </div>
-      <div className="flex flex-col justify-center items-center text-center py-8 bg-zinc-50 border border-zinc-200 dark:bg-neutral-900 dark:border-zinc-600 rounded-xl">
+      <div className="flex flex-col justify-center items-center text-center py-8 ">
         <motion.div
           initial={{ opacity: 0, x: -200 }}
           animate={{ opacity: 1, x: 0 }}
@@ -24,9 +23,7 @@ export default function Page() {
               Track Your Expenses. Achieve Your Goals.
             </h1>
             <p className="text-gray-700 dark:text-gray-200 text-base/8 md:text-xl/8">
-              Take control of your money with a clear dashboard and quick tools
-              to add or edit income and expenses. Export your data anytime as
-              CSV and stay on track to reach your goals.
+              Take control of your money with a clear dashboard to track expenses and export your data anytime.
             </p>
           </div>
           <div className="flex flex-col gap-2">
