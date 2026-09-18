@@ -10,6 +10,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { DEMO_MODE} from "@/lib/config"
 
 export function DeleteIncome({ id }: { id: string }) {
   const deleteIncomeWithId = deleteIncome.bind(null, id);
@@ -30,7 +31,7 @@ export function DeleteIncome({ id }: { id: string }) {
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <form action={deleteIncomeWithId}>
-            <AlertDialogAction type="submit">Continue</AlertDialogAction>
+            <AlertDialogAction type="submit" disabled={DEMO_MODE}>Continue</AlertDialogAction>
           </form>
         </AlertDialogFooter>
       </AlertDialogContent>
@@ -55,9 +56,9 @@ export function DeleteExpense({ id }: { id: string }) {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>{" "}
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
           <form action={deleteExpenseWithId}>
-            <AlertDialogAction type="submit">Continue</AlertDialogAction>
+            <AlertDialogAction type="submit" disabled={DEMO_MODE}>Continue</AlertDialogAction>
           </form>
         </AlertDialogFooter>
       </AlertDialogContent>
